@@ -1,0 +1,29 @@
+<div>
+<div class = "row" dir-paginate="row in rows | itemsPerPage: 10">  
+   <div class = "col-sm-6 col-md-3">
+      <a href = "#" class = "thumbnail">
+         <img src = "{{row[0].imageUrl}}" alt = "Generic placeholder thumbnail">
+      </a>
+   </div>
+   
+   <div class = "col-sm-6 col-md-3">
+      <a href = "#" class = "thumbnail">
+         <img src = "{{row[1].imageUrl}}" alt = "Generic placeholder thumbnail">
+      </a>
+   </div>
+   
+   <div class = "col-sm-6 col-md-3">
+      <a href = "#" class = "thumbnail">
+         <img src = "{{row[2].imageUrl}}" alt = "Generic placeholder thumbnail">
+      </a>
+   </div>
+   
+   <div class = "col-sm-6 col-md-3">
+      <a href = "#" class = "thumbnail">
+         <img src = "{{row[3].imageUrl}}" alt = "Generic placeholder thumbnail">
+      </a>
+   </div>
+   
+</div>
+<dir-pagination-controls></dir-pagination-controls>
+</div>
