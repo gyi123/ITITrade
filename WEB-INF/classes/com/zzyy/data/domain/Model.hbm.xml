@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.zzyy.data.domain">
+	<class name="Category" table="CATEGORY">
+		<id name="id" column="ID">
+			<generator class="native"/>
+		</id>
+		<property name="name" column="NAME" />
+		<property name="generation" column="GENERATION" />
+		<property name="description" column="DESCRIPTION" />
+		<property name="parentId" column="PARENTID" />
+		<set name="items" inverse="true" cascade="all">
+            <key column="CATEGORYID" not-null="true" />
+            <one-to-many class="Item"/>
+        </set>
+	</class>
+	<class name="Item" table="ITEM">
+		<id name="id" column="ID">
+			<generator class="native"/>
+		</id>
+		<property name="name" column="NAME" />
+		<property name="description" column="DESCRIPTION" />
+		<set name="images" inverse="true" cascade="all">
+            <key column="ITEMID" not-null="true" />
+            <one-to-many class="Image"/>
+        </set>
+		<many-to-one name="category" class="Category"
+            column="CATEGORYID" not-null="true"/>
+	</class>
+	<class name="Image" table="IMAGE">
+		<id name="id" column="ID">
+			<generator class="native"/>
+		</id>
+		<property name="name" column="NAME" />
+		<property name="file" column="FILE" />
+		<many-to-one name="item" class="Item"
+            column="ITEMID" not-null="true"/>
+	</class>
+	<class name="User" table="USER">
+		<id name="id" column="ID">
+			<generator class="native"/>
+		</id>
+		<property name="name" column="NAME" />
+		<property name="password" column="PASSWORD" />
+		<property name="email" column="EMAIL" />
+		<property name="active" column="ACTIVE"></property>
+		<set name="roles" table="USER_ROLE" 
+        	inverse="false" lazy="true" fetch="select"  >
+            <key>
+                <column name="USERID" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.zzyy.data.domain.Role">
+                <column name="ROLEID" not-null="true" />
+            </many-to-many>
+        </set>
+	</class>
+	<class name="Role" table="ROLE">
+		<id name="id" column="ID">
+			<generator class="native"/>
+		</id>
+		<property name="name" column="NAME" />
+		<property name="desc" column="DESC" />
+		<set name="users" table="USER_ROLE" 
+        	inverse="true" lazy="true" fetch="select" >
+            <key>
+                <column name="ROLEID" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.zzyy.data.domain.User">
+                <column name="USERID" not-null="true" />
+            </many-to-many>
+        </set>
+	</class>
+
+	
+		
+</hibernate-mapping>

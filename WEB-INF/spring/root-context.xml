@@ -1,0 +1,84 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<!-- property name="url" value="jdbc:mysql://localhost:3306/retailer" /-->
+		<property name="url" value="jdbc:mysql://127.8.58.130:3306/retailer"/>
+		<property name="username" value="webuser" />
+		<property name="password" value="password01" />
+	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:hibernate.cfg.xml" />
+	</bean>
+
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+
+	<tx:annotation-driven />
+
+	<bean id="productDao" class="com.zzyy.data.dao.impl.ProductDaoImpl">
+		<constructor-arg>
+			<ref bean="sessionFactory" />
+		</constructor-arg>
+	</bean>
+
+	<bean id="productService" class="com.zzyy.service.impl.ProductServiceImpl">
+		<constructor-arg>
+			<ref bean="productDao" />
+		</constructor-arg>
+	</bean>
+
+	<bean id="userDao" class="com.zzyy.data.dao.impl.UserDaoImpl">
+		<constructor-arg>
+			<ref bean="sessionFactory" />
+		</constructor-arg>
+	</bean>
+
+	<bean id="userService" class="com.zzyy.service.impl.UserServiceImpl">
+		<constructor-arg>
+			<ref bean="userDao" />
+		</constructor-arg>
+	</bean>
+
+	<security:http auto-config="true">
+		<security:intercept-url pattern="/admin/**"
+			access="hasAuthority('ADMINISTRATOR')" />
+                             
+		<security:form-login login-page="/login.jsp"
+			default-target-url="/admin/admin.jsp" login-processing-url="/admin/j_spring_security_check"
+			authentication-failure-url="/login?error" username-parameter="j_username"
+			password-parameter="j_password" />
+		<security:logout invalidate-session="true" logout-success-url="/login.jsp" logout-url="logout"/>
+		<!-- anonymous username="guest" granted-authority=""/ -->
+		<security:csrf disabled="true"/>
+		<security:remember-me />
+		<security:port-mappings>
+			<security:port-mapping http="8080" https="9443" />
+		</security:port-mappings>
+	</security:http>
+
+	<security:authentication-manager>
+		<security:authentication-provider>
+			<security:jdbc-user-service
+				data-source-ref="dataSource"
+				users-by-username-query="select name as username, password, 'true' as enabled from retailer.user where name=?"
+				authorities-by-username-query="select u.name as username, r.name as role from retailer.user u, retailer.user_role ur, retailer.role r where u.id = ur.userid and ur.roleid = r.id and u.name =?" />
+		</security:authentication-provider>
+	</security:authentication-manager>
+
+</beans>
