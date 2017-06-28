@@ -6,8 +6,8 @@ app.config(function($routeProvider, paginationTemplateProvider) {
 				templateUrl: 'resources/pages/home.html',
 				controller  : 'homeCtrl'
 			})
-			.when('/introduction', {
-				templateUrl: 'resources/pages/intro.html'
+			.when('/parent', {
+				templateUrl: 'resources/pages/parent.html'
 			})
 			.when('/brand', {
 				templateUrl: 'resources/pages/brand.html'
@@ -21,6 +21,10 @@ app.config(function($routeProvider, paginationTemplateProvider) {
 			.when('/category/:catId', {
 				templateUrl: 'resources/pages/category.html',
 				controller  : 'categoryCtrl'
+			})
+			.when('/rnd', {
+				templateUrl: 'resources/pages/rnd.html',
+				controller  : 'rndCtrl'
 			})
 			.otherwise({
 				redirectTo: '/'
@@ -47,6 +51,27 @@ app.controller('homeCtrl', ['$scope', '$http', '$filter', '$location', function 
 		  image: 'resources/images/20150708vryvew.jpg',
 		  test: 'Our Target',
 		  id: 2
+	  }];
+}]);
+
+app.controller('rndCtrl', ['$scope', '$http', '$filter', '$location', function ($scope, $http, $filter, $location) {
+	  $scope.myInterval = 1000;
+	  $scope.noWrapSlides = false;
+	  var slides = $scope.slides = [ {
+		  image: 'resources/images/ys1.jpg',
+		  id: 0
+	  },{
+		  image: 'resources/images/ys2.jpg',
+		  id: 1
+	  },{
+		  image: 'resources/images/ys3.jpg',
+		  id: 2
+	  },{
+		  image: 'resources/images/ys4.jpg',
+		  id: 3
+	  },{
+		  image: 'resources/images/ys5.jpg',
+		  id: 4
 	  }];
 }]);
 
