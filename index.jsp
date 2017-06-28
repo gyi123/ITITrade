@@ -37,10 +37,13 @@
     <div class="collapse navbar-collapse" uib-collapse="navCollapsed" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
         <li class="active"><a href="#/">Home</a></li>
-        <li><a href="#/introduction">About</a></li>
-        <li><a href="#/brand">Our Brands</a></li>
-        <li><a href="#/product">Our Products</a></li>
-        <li><a href="#/contact">Contact</a></li>
+        !--li><a href="#/introduction">About</a></li-->
+		<li><a href="#/overseas">Overseas</a></li>
+		<li><a href="#/product">Products</a></li>
+        <li><a href="#/brand">Brands</a></li>
+        <li><a href="#/parent">About Intradin</a></li>
+		<li><a href="#/rnd">R & D Center</a></li>
+        <!--li><a href="#/contact">Contact</a></li-->
       </ul>
     </div>
   </div>
