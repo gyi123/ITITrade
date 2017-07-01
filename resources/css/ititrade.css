@@ -29,3 +29,44 @@
     float: right;
     margin-top: 20px;
 }
+
+
+
+@keyframes zoom1 {
+	0% {     
+		-webkit-transition: all 1s ease; /* Safari and Chrome */
+  		-moz-transition: all 1s ease; /* Firefox */
+  		-o-transition: all 1s ease; /* IE 9 */
+  		-ms-transition: all 1s ease; /* Opera */
+  		transition: all 1s ease;
+        max-width: 100%; 
+        }
+	50% { 
+    	-webkit-transform:scale(1.25); /* Safari and Chrome */
+    	-moz-transform:scale(1.25); /* Firefox */
+    	-ms-transform:scale(1.25); /* IE 9 */
+    	-o-transform:scale(1.25); /* Opera */
+    	 transform:scale(1.25);
+    	}
+	
+	100% { 
+    	-webkit-transform:scale(1.50); /* Safari and Chrome */
+    	-moz-transform:scale(1.50); /* Firefox */
+    	-ms-transform:scale(1.50); /* IE 9 */
+    	-o-transform:scale(1.50); /* Opera */
+    	 transform:scale(1.50);
+    	}
+}
+
+@keyframes slide-right {
+	from { margin-left: -100%; }
+	100% { margin-left: 0%;}
+}
+
+/* just apply some height and width to the wrapper.*/
+.overseas {
+  width:1200px;
+  height:750px;
+  overflow: hidden;
+  animation: slide-right 5s linear 1;
+}
