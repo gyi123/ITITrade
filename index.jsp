@@ -19,6 +19,11 @@
 <script src="resources/ui-grid/ui-grid.js"></script>
 
 <script src="resources/javascript/mainApp.js"></script>
+<script src="resources/javascript/jquery.min.js"></script>
+<script src="resources/javascript/jquery.webticker.min.js"></script>
+<script>
+var jq = $.noConflict();
+</script>
 
 </head>
 
@@ -37,7 +42,7 @@
     <div class="collapse navbar-collapse" uib-collapse="navCollapsed" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
         <li class="active"><a href="#/">Home</a></li>
-        !--li><a href="#/introduction">About</a></li-->
+        <!--li><a href="#/introduction">About</a></li-->
 		<li><a href="#/overseas">Overseas</a></li>
 		<li><a href="#/product">Products</a></li>
         <li><a href="#/brand">Brands</a></li>
