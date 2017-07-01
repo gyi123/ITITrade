@@ -6,6 +6,9 @@ app.config(function($routeProvider, paginationTemplateProvider) {
 				templateUrl: 'resources/pages/home.html',
 				controller  : 'homeCtrl'
 			})
+			.when('/overseas', {
+				templateUrl: 'resources/pages/overseas.html'
+			})
 			.when('/parent', {
 				templateUrl: 'resources/pages/parent.html'
 			})
@@ -55,24 +58,11 @@ app.controller('homeCtrl', ['$scope', '$http', '$filter', '$location', function 
 }]);
 
 app.controller('rndCtrl', ['$scope', '$http', '$filter', '$location', function ($scope, $http, $filter, $location) {
-	  $scope.myInterval = 1000;
-	  $scope.noWrapSlides = false;
-	  var slides = $scope.slides = [ {
-		  image: 'resources/images/ys1.jpg',
-		  id: 0
-	  },{
-		  image: 'resources/images/ys2.jpg',
-		  id: 1
-	  },{
-		  image: 'resources/images/ys3.jpg',
-		  id: 2
-	  },{
-		  image: 'resources/images/ys4.jpg',
-		  id: 3
-	  },{
-		  image: 'resources/images/ys5.jpg',
-		  id: 4
-	  }];
+	  
+	  angular.element(document).ready(function () {    
+		    jq('#webTicker').webTicker( {height:'150px'});
+		});
+	 
 }]);
 
 app.controller('categoryCtrl', ['$scope', '$http', '$routeParams', '$filter', '$location', function ($scope, $http, $routeParams, $filter, $location) {
